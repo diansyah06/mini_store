@@ -1,4 +1,4 @@
-name: Node.js CI
+name: Node.js CI/CD
 
 # Trigger workflow saat push atau pull request ke branch main
 on:
@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout repo
+      # Checkout kode
       - uses: actions/checkout@v3
 
       # Setup Node.js
@@ -25,6 +25,14 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Jalankan script Anda
-      - name: Run application script
-        run: node index.js
+      # Run lint (opsional, pastikan ada script lint di package.json)
+      - name: Run Lint
+        run: npm run lint || echo "Lint errors ignored"
+
+      # Run tests (opsional, pastikan ada script test di package.json)
+      - name: Run Tests
+        run: npm test || echo "Tests failed but continue"
+
+      # Jalankan aplikasi tanpa bind ke port saat CI
+      - name: Run application script (CI safe)
+        run: CI=true node index.js

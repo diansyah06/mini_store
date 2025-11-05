@@ -333,6 +333,13 @@ app.put('/api/product/:id', async (req, res) => {
 })
 
 
-app.listen(300, () => {
-  console.log(`Server run at http://localhost:300}`)
-})
+const PORT = process.env.PORT || 300;
+const CI = process.env.CI === 'true';
+
+if (!CI) {
+  app.listen(PORT, () => {
+    console.log(`Server run at http://localhost:${PORT}`)
+  });
+} else {
+  console.log('Running in CI mode: skipping server listen');
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <%- include('./layout/styling.ejs') %>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+      <h1>Register</h1>
+      <div style="display:grid;">
+        <label>Name</label><br>
+        <input type="text" name="name" id="name"><br />
+        <label>Username</label><br>
+        <input type="text" name="username" id="username"><br>
+        <label>Password</label><br>
+        <input type="password" name="password" id="password"><br>
+        <div>
+          <label id="show">Show</label>
+          <input type="checkbox" id="check">
+        </div><br>
+        <label>Email</label><br>
+        <input type="email" name="email" id="email"><br>
+        <button id="signin">Sign in</button><br>
+        <a href="/" style="margin-top: 10px;">Login?</a href="/">
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      const signin = document.getElementById('signin')
+      signin.addEventListener('click', () => {
+        if (document.getElementById("name").value === "" || document.getElementById('username').value === "" || document.getElementById('password').value === "" || document.getElementById('email').value === "") {
+          alert('Harap isi semua kolom')
+        } else {
+          let cek = false
+          const data1 = {
+            email: document.getElementById('email').value
+          }
+          axios.post('/api/email', data1)
+            .then((response) => {
+              alert("Email tidak tersedia!")
+              console.log(response)
+              cek = false
+            })
+            .catch(() => {
+              cek = true
+            })
+
+          const data2 = {
+            username: document.getElementById('username').value
+          }
+          axios.post('/api/username', data2)
+            .then((response) => {
+              alert("Username tidak tersedia!")
+              console.log(response)
+              cek = false
+            })
+            .catch((tersedia) => {
+              if (cek === true) {
+                const userData = {
+                  name: document.getElementById('name').value,
+                  username: document.getElementById('username').value,
+                  password: document.getElementById('password').value,
+                  email: document.getElementById('email').value
+                };
+
+                axios.post('/api/register', userData)
+                  .then((response) => {
+                    alert("Registrasi berhasil " + response.status)
+                    window.location.replace('/')
+                  })
+                  .catch((err) => {
+                    alert('Ada kesalahan : ' + err);
+                    console.log(err);
+                  });
+              }
+            })
+        }
+      })
+
+      const check = document.getElementById('check')
+
+      check.addEventListener('change', () => {
+        if (check.checked) {
+          document.getElementById('password').type = 'text';
+        } else {
+          document.getElementById('password').type = 'password';
+        }
+      })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  backend:
+    build: .
+    container_name: mini_store_backend
+    restart: always
+    ports:
+      - "300:300"
+    environment:
+      - DOCKER_ENV=true
+      - DB_NAME=mini_store
+      - DB_USER=root
+      - DB_PASS=root
+      - DB_HOST=host.docker.internal  # akses MySQL lokal
+      - DB_PORT=3307                  # port MySQL lokal Anda
+      - DB_DIALECT=mysql
+    volumes:
+      - .:/app

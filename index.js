@@ -43,26 +43,33 @@ app.get('/tambah', (req, res) => {
 
 //Bagian user
 let batas = false
-app.post("/api/login", (req, res) => {
-  User.findOne({ where: { username: req.body.username, password: req.body.password } })
-    .then((result) => {
-      if (result) {
-        batas = true
-        req.session.tbl_users = result
+app.post("/api/login", async (req, res) => {
+  console.log("Data login diterima:", req.body);
 
-        res.json({ status: 200, msg: "Login berhasil" });
-
-      } else {
-        batas = false
-        res.status(401).json({ status: 401, msg: "Login gagal" });
+  try {
+    const result = await User.findOne({
+      where: {
+        username: req.body.username,
+        password: req.body.password
       }
-    })
-    .catch((err) => {
-      // Tangani kesalahan lain yang mungkin terjadi
-      console.error("Login error detail:", err)
-      res.status(500).json({ status: 500, msg: "Server error", error: err });
     });
+
+    console.log("Hasil pencarian user:", result);
+
+    if (result) {
+      batas = true;
+      req.session.tbl_users = result;
+      return res.json({ status: 200, msg: "Login berhasil" });
+    } else {
+      batas = false;
+      return res.status(401).json({ status: 401, msg: "Login gagal" });
+    }
+  } catch (err) {
+    console.error("Login error detail:", err);
+    return res.status(500).json({ status: 500, msg: "Server error", error: err });
+  }
 });
+
 
 app.post('/api/email', (req, res) => {
   User.findOne({ where: { email: req.body.email } })

@@ -24,6 +24,11 @@
           <h2>
             <%= product.name%>
           </h2>
+          <p class="card-text" style="font-size: 0.85em; color: #6c757d;">
+            <% if (el.tbl_user) { %>
+              By: <%= el.tbl_user.name %> (<%= el.tbl_user.username %>)
+                  <% } %>
+          </p>
           <p class="text-muted">Harga: Rp<%= product.price%>
           </p>
           <p>

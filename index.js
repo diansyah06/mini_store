@@ -165,7 +165,7 @@ app.put('/edit/user/:id', async (req, res) => {
     file.mv(`./public/profilPic/${fileName}`, (err) => {
       if (err) return res.status(400).json({ error: err });
     })
-    url = `${req.protocol}://${req.get("host")}/profilPic/${fileName}`;
+    url = `/profilPic/${fileName}`;
   }
   console.log('url :' + url)
   const name = req.body.name;
@@ -246,7 +246,7 @@ app.post("/api/product", async (req, res) => {
   const fileSize = file.data.length;
   const ext = path.extname(file.name);
   const fileName = file.md5 + ext;
-  const url = `${req.protocol}://${req.get("host")}/image/${fileName}`;
+  const url = `/image/${fileName}`;
   const allowedType = ['.png', '.jpeg', '.jpg'];
   if (!allowedType.includes(ext.toLocaleLowerCase())) return res.status(401).json({ msg: 'invalid image' })
   if (fileSize > 5000000) return res.status(401).json({ msg: 'image must be less then 5MB ' });

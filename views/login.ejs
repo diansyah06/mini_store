@@ -5,75 +5,81 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
   <%- include('./layout/styling.ejs') %>
 </head>
 
 <body>
-  <main>
-    <div class="container">
-      <h1>Login</h1>
-      <div style="display: grid;">
-        <label>Username</label><br>
-        <input type="text" name="username" id="username" required><br>
-        <label>Password</label><br>
-        <input type="password" name="password" id="password" required>
-        <div>
-          <label id="show">Show</label>
-          <input type="checkbox" id="check">
-        </div><br>
-        <button id="login">Log in</button>
-        <a href="/register" style="margin-top: 10px;">Register?</a>
+
+  <div class="form-container">
+    <h1>Login</h1>
+    
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required>
+      <div class="show-password">
+        <input type="checkbox" id="check">
+        <label for="check" id="show">Show Password</label>
       </div>
     </div>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-      const check = document.getElementById('check')
+    
+    <button id="login" class="form-button">Log In</button>
+    
+    <a href="/register" class="form-link">Belum punya akun? Register</a>
+  </div>
 
-      check.addEventListener('change', () => {
-        if (check.checked) {
-          document.getElementById('password').type = 'text';
-        } else {
-
-          document.getElementById('password').type = 'password';
-        }
-      })
-      document.getElementById('login').onclick = () => {
-        axios({
-          method: 'post',
-          url: '/api/login',
-          data: {
-            username: document.getElementById("username").value,
-            password: document.getElementById('password').value
-          }
-        }).then((response) => {
-          console.log(response);
-          const result = response.data; // Mengakses respons dari server
-
-          if (result.status === 200) {
-            Swal.fire({
-              title: 'Login Berhasil!',
-              icon: 'success',
-              timer: 1500,
-              showConfirmButton: false
-            }).then(() => {
-              window.location = '/api/product';
-            });
-
-          } return 0
-
-        }).catch((err) => {
-          Swal.fire({
-            title: 'Login Gagal',
-            text: 'Username atau password salah.',
-            icon: 'error'
-          });
-
-          window.location = '/'
-        });
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+  <script>
+    // --- SCRIPT LAMA ANDA (SAYA HANYA MENGGANTI ALERT) ---
+    const check = document.getElementById('check')
+    
+    check.addEventListener('change',()=>{
+      if (check.checked) {
+        document.getElementById('password').type = 'text';
+      } else {
+        document.getElementById('password').type = 'password';
       }
-    </script>
-
+    })
+    
+    document.getElementById('login').onclick = () => {
+      axios({
+        method: 'post',
+        url: '/api/login',
+        data: {
+          username: document.getElementById("username").value,
+          password: document.getElementById('password').value
+        }
+      }).then((response) => {
+        const result = response.data;
+  
+        if (result.status === 200) {
+          Swal.fire({
+            title: 'Login Berhasil!',
+            icon: 'success',
+            timer: 1500,
+            showConfirmButton: false
+          }).then(() => {
+            window.location = '/api/product';
+          });
+        }
+        return 0;
+      }).catch((err) => {
+        Swal.fire({
+          title: 'Login Gagal',
+          text: 'Username atau password salah.',
+          icon: 'error'
+        });
+        
+      });
+    }
+  </script>
+    
 </body>
-
 </html>

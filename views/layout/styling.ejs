@@ -1,45 +1,114 @@
 <style>
-    * {
-      margin: 0;
-      padding: 0;
-      outline: 0;
-      font-family: 'Open Sans', sans-serif;
-    }
+  /* Mengatur ulang beberapa default browser */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+  }
 
-    body {
-      height: 100vh;
-      background-image: url(https://wallpapercave.com/wp/ixmt8JQ.jpg);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
+  /* Memberi latar belakang gradien yang lembut dan
+    menggunakan flexbox untuk memusatkan kartu form 
+  */
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f2f5; /* Warna solid jika gradien tidak didukung */
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+  }
 
-    .container {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      padding: 20px 25px;
-      width: 300px;
+  /* Ini adalah "kartu" yang membungkus form Anda.
+    Memberinya bayangan (shadow) dan sudut melengkung.
+  */
+  .form-container {
+    background-color: #ffffff;
+    padding: 2.5rem 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
 
-      background-color: rgba(0, 0, 0, .7);
-      box-shadow: 0 0 10px rgba(255, 255, 255, .3);
-    }
+  /* Judul (Login/Register) */
+  .form-container h1 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
 
-    .container h1 {
-      text-align: left;
-      color: #fafafa;
-      margin-bottom: 30px;
-      text-transform: uppercase;
-      border-bottom: 4px solid #2979ff;
-    }
+  /* Grup untuk setiap label + input */
+  .form-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
+  }
 
-    .container label {
-      text-align: left;
-      color: #90caf9;
-    }
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-weight: 600;
+  }
 
-    a {
-      color: white;
-    }
-  </style>
+  /* Input field yang modern */
+  .form-group input[type="text"],
+  .form-group input[type="password"],
+  .form-group input[type="email"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+
+  /* Styling untuk tombol */
+  .form-button {
+    width: 100%;
+    padding: 0.85rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .form-button:hover {
+    background-color: #0056b3;
+  }
+
+  /* Styling untuk "Show Password" */
+  .show-password {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .show-password input {
+    margin-left: 0.5rem;
+  }
+  
+  .show-password label {
+    margin: 0;
+    margin-left: 0.25rem;
+    font-weight: 400;
+  }
+
+  /* Link "Register?" atau "Login?" */
+  .form-link {
+    display: block;
+    margin-top: 1.5rem;
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .form-link:hover {
+    text-decoration: underline;
+  }
+</style>

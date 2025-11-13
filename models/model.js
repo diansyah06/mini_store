@@ -1,7 +1,5 @@
 import { Sequelize, DataTypes } from "sequelize";
-import dotenv from "dotenv";
 
-dotenv.config(); // baca variabel dari file .env
 
 const sequelize = new Sequelize(
   process.env.DB_NAME || "mini_store",

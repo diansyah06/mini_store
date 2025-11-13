@@ -52,6 +52,9 @@
                   </h5>
                   <p class="card-text">Rp.<%= el.price %>
                   </p>
+                  <p class="card-text" style="font-size: 0.85em; color: #6c757d;">
+                    By: <%= user.name %> (<%= user.username %>)
+                  </p>
                   <a href="/edit/<%= el.id %>" style="color:black;text-decoration: none;">Edit</a>
                   <button onclick=<%='del(' +el.id+')' %> class="btn text-bg-dark" style="margin-left: 5px;">Delete</a>
                 </div>

@@ -10,6 +10,9 @@ import session from 'express-session';
 import fs from 'fs';
 import { Sequelize } from 'sequelize';
 
+User.hasMany(Product, { foreignKey: 'id_user' });
+Product.belongsTo(User, { foreignKey: 'id_user' });
+
 const app = express();
 
 app.use(express.static('public'))
@@ -186,7 +189,7 @@ app.put('/edit/user/:id', async (req, res) => {
 let qty =
   app.get("/api/product", (req, res) => {
     if (batas == true) {
-      Product.findAll().then((results) => {
+      Product.findAll({ include: User }).then((results) => {
         res.render('product', { product: results, user: req.session.tbl_users });
       });
     }

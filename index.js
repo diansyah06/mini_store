@@ -102,7 +102,7 @@ app.post('/api/username', (req, res) => {
 })
 
 app.post('/api/register', (req, res) => {
-  User.create({ name: req.body.name, username: req.body.username, password: req.body.password, email: req.body.email, avatar: "http://localhost:300/profilPic/user.png" })
+  User.create({ name: req.body.name, username: req.body.username, password: req.body.password, email: req.body.email, avatar: "/profilPic/user.png" })
     .then((result) => {
       res.status(200).json({ msg: "Registrasi berhasil" })
     }).catch((err) => {

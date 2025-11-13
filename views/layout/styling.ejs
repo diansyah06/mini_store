@@ -7,36 +7,49 @@
     font-family: 'Open Sans', sans-serif;
   }
 
-  /* Memberi latar belakang gradien yang lembut dan
-    menggunakan flexbox untuk memusatkan kartu form 
+  /* Menggunakan TATA LETAK BARU (flexbox)
+    tapi dengan GAMBAR LATAR LAMA Anda 
   */
   body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: #f0f2f5; /* Warna solid jika gradien tidak didukung */
-    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    
+    /* --- INI DARI CSS LAMA ANDA --- */
+    background-image: url(https://wallpapercave.com/wp/ixmt8JQ.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* ------------------------------ */
   }
 
-  /* Ini adalah "kartu" yang membungkus form Anda.
-    Memberinya bayangan (shadow) dan sudut melengkung.
+  /* Menggunakan KARTU BARU
+    tapi dengan WARNA KARTU LAMA Anda 
   */
   .form-container {
-    background-color: #ffffff;
+    /* --- INI DARI CSS LAMA ANDA --- */
+    background-color: rgba(0, 0, 0, .7);
+    box-shadow: 0 0 10px rgba(255, 255, 255, .3);
+    /* ------------------------------ */
+
     padding: 2.5rem 3rem;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     width: 100%;
     max-width: 400px;
     text-align: center;
   }
 
-  /* Judul (Login/Register) */
+  /* Menggunakan JUDUL BARU
+    tapi dengan WARNA TEKS LAMA Anda 
+  */
   .form-container h1 {
-    color: #333;
+    color: #fafafa; /* <-- Dari CSS Lama */
     margin-bottom: 1.5rem;
     font-size: 2rem;
+    text-transform: uppercase;
+    border-bottom: 4px solid #2979ff; /* <-- Dari CSS Lama */
+    text-align: left;
   }
 
   /* Grup untuk setiap label + input */
@@ -45,14 +58,19 @@
     text-align: left;
   }
 
+  /* Menggunakan LABEL BARU
+    tapi dengan WARNA TEKS LAMA Anda 
+  */
   .form-group label {
     display: block;
     margin-bottom: 0.5rem;
-    color: #555;
+    color: #90caf9; /* <-- Dari CSS Lama */
     font-weight: 600;
   }
 
-  /* Input field yang modern */
+  /* Ini adalah INPUT FIELD BARU (Putih),
+    sesuai permintaan Anda 
+  */
   .form-group input[type="text"],
   .form-group input[type="password"],
   .form-group input[type="email"] {
@@ -61,15 +79,17 @@
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+    background: #fff; /* Pastikan putih */
+    color: #333;      /* Teks di dalam input jadi hitam */
   }
 
-  /* Styling untuk tombol */
+  /* Styling untuk tombol (BARU) */
   .form-button {
     width: 100%;
     padding: 0.85rem;
     border: none;
     border-radius: 5px;
-    background-color: #007bff;
+    background-color: #2979ff; /* Samakan dengan border h1 */
     color: white;
     font-size: 1.1rem;
     font-weight: 600;
@@ -81,13 +101,15 @@
     background-color: #0056b3;
   }
 
-  /* Styling untuk "Show Password" */
+  /* Menggunakan "Show Password" BARU
+    tapi dengan WARNA TEKS LAMA Anda 
+  */
   .show-password {
     display: flex;
     align-items: center;
     margin-top: 0.5rem;
     font-size: 0.9rem;
-    color: #666;
+    color: #90caf9; /* <-- Dari CSS Lama */
   }
 
   .show-password input {
@@ -98,13 +120,16 @@
     margin: 0;
     margin-left: 0.25rem;
     font-weight: 400;
+    color: #90caf9; /* <-- Dari CSS Lama */
   }
 
-  /* Link "Register?" atau "Login?" */
+  /* Menggunakan LINK BARU
+    tapi dengan WARNA TEKS LAMA Anda 
+  */
   .form-link {
     display: block;
     margin-top: 1.5rem;
-    color: #007bff;
+    color: #ffffff; /* <-- Dari CSS Lama */
     text-decoration: none;
   }
 

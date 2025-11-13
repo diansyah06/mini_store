@@ -156,7 +156,7 @@ app.put('/edit/user/:id', async (req, res) => {
     const fileSize = file.data.length;
     const ext = path.extname(file.name);
     const fileName = file.md5 + ext;
-    
+
     const allowedType = ['.png', '.jpeg', '.jpg'];
 
     if (!allowedType.includes(ext.toLocaleLowerCase())) return res.status(401).json({ msg: 'invalid image' })
@@ -167,14 +167,16 @@ app.put('/edit/user/:id', async (req, res) => {
     })
     url = `${req.protocol}://${req.get("host")}/profilPic/${fileName}`;
   }
-  console.log('url :'+url)
+  console.log('url :' + url)
   const name = req.body.name;
   try {
-    await User.update({name:name, username:req.body.username,password:req.body.password,email:req.body.email,avatar:url},{where:{
-      id: req.params.id
-    }})
+    await User.update({ name: name, username: req.body.username, password: req.body.password, email: req.body.email, avatar: url }, {
+      where: {
+        id: req.params.id
+      }
+    })
     req.session.destroy()
-    res.status(200).json({msg:"User updated successfully"})
+    res.status(200).json({ msg: "User updated successfully" })
   } catch (error) {
     console.log(error.message);
   }
@@ -221,7 +223,7 @@ app.delete('/api/cart/:id', (req, res) => {
 })
 
 app.put('/api/cart/:id', (req, res) => {
-  Cart.update({ qty: req.body.qty, total:req.body.total }, { where: { id: req.params.id } })
+  Cart.update({ qty: req.body.qty, total: req.body.total }, { where: { id: req.params.id } })
     .then((result) => {
       res.status(200).json({ msg: 'qty berhasil diubah' })
     })
@@ -300,7 +302,7 @@ app.put('/api/product/:id', async (req, res) => {
   let fileName = '';
   let url = '';
   if (req.files === null) {
-    fileName =product.name;
+    fileName = product.name;
     url = product.url
   } else {
     const file = req.files.pictures;
@@ -319,14 +321,16 @@ app.put('/api/product/:id', async (req, res) => {
       if (err) return res.status(400).json({ error: err });
     })
   }
-  console.log('filename : '+fileName);
-  console.log('url :'+url)
+  console.log('filename : ' + fileName);
+  console.log('url :' + url)
   const name = req.body.name;
   try {
-    await Product.update({name:name, description:req.body.description,price:req.body.price,pictures:fileName, url:url},{where:{
-      id: req.params.id
-    }})
-    res.status(200).json({msg:"Product updated successfully"})
+    await Product.update({ name: name, description: req.body.description, price: req.body.price, pictures: fileName, url: url }, {
+      where: {
+        id: req.params.id
+      }
+    })
+    res.status(200).json({ msg: "Product updated successfully" })
   } catch (error) {
     console.log(error.message);
   }
@@ -334,12 +338,6 @@ app.put('/api/product/:id', async (req, res) => {
 
 
 const PORT = process.env.PORT || 300;
-const CI = process.env.CI === 'true';
-
-if (!CI) {
-  app.listen(PORT, () => {
-    console.log(`Server run at http://localhost:${PORT}`)
-  });
-} else {
-  console.log('Running in CI mode: skipping server listen');
-}
+app.listen(PORT, () => {
+  console.log(`Server run at http://localhost:${PORT}`)
+});

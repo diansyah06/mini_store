@@ -24,18 +24,24 @@
           <h2>
             <%= product.name%>
           </h2>
-          <p class="card-text" style="font-size: 0.85em; color: #6c757d;">
-            <% if (el.tbl_user) { %>
-              By: <%= el.tbl_user.name %> (<%= el.tbl_user.username %>)
-                  <% } %>
-          </p>
           <p class="text-muted">Harga: Rp<%= product.price%>
           </p>
           <p>
             <%= product.description %>
           </p>
-          <button type="button" id="keranjang" class="btn btn-primary">Tambahkan ke Keranjang</button>
-          <input type="number" id="number" value=1 min=1 max=10>
+
+          <div class="mt-3" style="border-top: 1px solid #eee; padding-top: 10px;">
+            <p style="font-size: 0.9em; color: #6c757d; margin-bottom: 0;">Diposting oleh:</p>
+            <% if (product.tbl_user) { %>
+              <h5 style="margin-top: 0;">
+                <%= product.tbl_user.name %> (<%= product.tbl_user.username %>)
+              </h5>
+              <% } else { %>
+                <h5 style="margin-top: 0;">User tidak dikenal</h5>
+                <% } %>
+          </div>
+          <button type="button" id="keranjang" class="btn btn-primary">Tambahkan
+            <input type="number" id="number" value=1 min=1 max=10>
 
 
         </div>

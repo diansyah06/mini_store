@@ -236,7 +236,10 @@ app.put('/api/cart/:id', (req, res) => {
 })
 
 app.get('/api/product/:id', (req, res) => {
-  Product.findOne({ where: { id: req.params.id } })
+  Product.findOne({
+    where: { id: req.params.id },
+    include: User 
+  })
     .then((result) => {
       res.render('main', { product: result, user: req.session.tbl_users })
     })
